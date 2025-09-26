@@ -83,9 +83,9 @@ GPSファイルデータごとにタイトルとコメントを設定する。�
 「滞留チェック」をチェックするとGPSの取得していない時間を削除することができる。  
 
 #### インストール方法
-実行ファイルのダウンロードは[gpsinfo-debug.apk
-](gpsinfo-debug.apk)をダウンロードする。    
+実行ファイルのダウンロードは[gpsinfo-debug.apk](gpsinfo-debug.apk)をダウンロードする。  
 <img src="image/download.png" width="80%">
+
 スマホを開発者オプションの設定にする(Android12/13)
 1.	スマホの設定アプリを開く
 2.	デバイス情報 (端末情報)をタップ
