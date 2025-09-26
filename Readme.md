@@ -14,7 +14,7 @@
 ##### ※GPSロガー : GPSからの位置情報を記録したものでその間の経路や距離、時間、高度、速度が求められる
 
 ### 起動画面
-<img src="Image/GpsInfo_Main.png" width="80%">
+<img src="image/GpsInfo_Main.png" width="80%">
 
 **タイトルバー** : グループ名と記録中のGPXファイル名が表示される  
 **目的地ボタン** : 目的地をリスト表示、選択した目的地の方向と距離を表示　　
@@ -31,17 +31,17 @@
 **ヘルプ** : 未作成  
 
 ### 目的地リスト選択
-<img src="Image/GpsInfo_TargetList.png" width="80%">
+<img src="image/GpsInfo_TargetList.png" width="80%">
 
 目的地リストは設定されているグループの目的地が現在地に近い順に表示される  
 
 ### 目的地グループ選択
-<img src="Image/GpsInfo_GroupList.png" width="80%">
+<img src="image/GpsInfo_GroupList.png" width="80%">
 
 目的地のグループ一覧を表示、選択されたグループの目的地が「目的地ボタン」で一覧表示される。  
 
 ### 目的地データ編集
-<img src="Image/GpsInfo_TargetEdit.png" width="80%">
+<img src="image/GpsInfo_TargetEdit.png" width="80%">
 
 目的地データの編集・追加ができる。  
 
@@ -97,11 +97,11 @@ GPSファイルデータごとにタイトルとコメントを設定する。�
 Filesアプリでダウンロードしたファイルをタップするかファイルを選択してから右側の点をタップするとメニューが表示されるのでインストールを選択するとインストールが開始される。  
 
 履歴  
-2025/09/26 Android Studio Norwhal で再作成
+2025/09/26 Android Studio Norwhal で再作成  
 
 
-### 開発環境
-Android Studio Narwhal 3 Feature Drop | 2025.1.3
-Build #AI-251.26094.121.2513.14007798, built on August 28, 2025
-Windows 11.0
-Java 
+### 開発環境  
+Android Studio Narwhal 3 Feature Drop | 2025.1.3  
+Build #AI-251.26094.121.2513.14007798, built on August 28, 2025  
+Windows 11.0  
+Java  
