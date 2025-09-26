@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="entries_list_gpsmintime">
+        <item >なし</item>
+        <item >5秒</item>
+        <item >10秒</item>
+        <item >15秒</item>
+        <item >30秒</item>
+        <item >60秒</item>
+        <item >3分</item>
+        <item >10分</item>
+    </string-array>
+    <string-array name="entriesValues_list_gpsmintime">
+        <item>0</item>
+        <item >5</item>
+        <item >10</item>
+        <item >15</item>
+        <item >30</item>
+        <item >60</item>
+        <item >180</item>
+        <item >600</item>
+    </string-array>
+    <string-array name="entries_list_gpsmindistance">
+        <item >なし</item>
+        <item >1m</item>
+        <item >2m</item>
+        <item >5m</item>
+        <item >10m</item>
+        <item >20m</item>
+        <item >50m</item>
+        <item >100m</item>
+        <item >200m</item>
+        <item >500m</item>
+    </string-array>
+    <string-array name="entries_list_gpsmaxdistance">
+        <item >なし</item>
+        <item >1km</item>
+        <item >2km</item>
+        <item >5km</item>
+        <item >10km</item>
+        <item >20km</item>
+        <item >50km</item>
+        <item >100km</item>
+        <item >200km</item>
+        <item >500km</item>
+    </string-array>
+    <string-array name="entriesValues_list_gpsmindistance">
+        <item>0</item>
+        <item >1</item>
+        <item >2</item>
+        <item >5</item>
+        <item >10</item>
+        <item >20</item>
+        <item >50</item>
+        <item >100</item>
+        <item >200</item>
+        <item >500</item>
+    </string-array>
+
+</resources>

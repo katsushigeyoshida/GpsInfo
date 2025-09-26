@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">あっちです</string>
+    <string name="label_GPSminTime">GPS測定間隔時間</string>
+    <string name="label_GPSminDistance">GPS測定間隔距離</string>
+    <string name="label_beep">ビープ音</string>
+    <string name="label_vibrator">バイブレータ</string>
+    <string name="key_GPSminTime">GPSminTime</string>
+    <string name="key_GPSminTime2">GPSminTime2</string>
+    <string name="key_GPSminDistance">GPSminDistance</string>
+    <string name="key_beep">beep</string>
+    <string name="key_vibrator">vibrator</string>
+    <string name="key_MaxElevator">MaxElevator</string>
+    <string name="key_MinElevator">MinElevator</string>
+    <string name="key_PreLatitude">PreLatitude</string>
+    <string name="key_PreLongitude">PreLongitude</string>
+    <string name="key_TotalDistance">TotalDistance</string>
+    <string name="key_StepCount">StepCount</string>
+    <string name="title_activity_gps_service_settings">GPSサービス設定</string>
+
+    <!-- Preference Titles -->
+    <string name="messages_header">Messages</string>
+    <string name="sync_header">Sync</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <string name="title_activity_settings">SettingsActivity</string>
+</resources>

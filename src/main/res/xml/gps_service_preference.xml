@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="GPSデータ記録">
+        <ListPreference
+            android:dialogTitle="@string/label_GPSminTime"
+            android:title="@string/label_GPSminTime"
+            android:key="@string/key_GPSminTime"
+            android:entries="@array/entries_list_gpsmintime"
+            android:entryValues="@array/entriesValues_list_gpsmintime"
+            android:summary="位置情報更新の最低時間(s)"
+            android:defaultValue="15"/>
+        <ListPreference
+            android:dialogTitle="@string/label_GPSminDistance"
+            android:title="@string/label_GPSminDistance"
+            android:key="@string/key_GPSminDistance"
+            android:entries="@array/entries_list_gpsmindistance"
+            android:entryValues="@array/entriesValues_list_gpsmindistance"
+            android:summary="位置情報更新の最低距離(m)"
+            android:defaultValue="0"/>
+        <CheckBoxPreference
+            android:summary="位置測定した時にビープ音で知らせる。"
+            android:defaultValue="true"
+            android:key="@string/key_beep"
+            android:title="ビープ音" />
+        <CheckBoxPreference
+            android:summary="位置測定した時にバイブレーションで知らせる。"
+            android:defaultValue="true"
+            android:key="@string/key_vibrator"
+            android:title="バイブレーション" />
+    </PreferenceCategory>
+
+</PreferenceScreen>
