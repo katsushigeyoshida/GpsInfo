@@ -89,6 +89,7 @@ public class GpsInfoActivity extends AppCompatActivity
     private final int MENU02 = 2;
     private final int MENU03 = 3;
     private final int MENU04 = 4;
+    private final int MENU05 = 5;
 
     ColorStateList mTrakButtonTextColors;       //  記録開始ボタン色
 
@@ -100,7 +101,17 @@ public class GpsInfoActivity extends AppCompatActivity
     private String mTargetFilePath;             //  目的地データファイルのパス
     protected static final String[] mTargetLocationFormat = {    //  目的地データのタイトル
             "目的地","緯度","経度","高度","グループ","メモ"};
-    private List<String[]> mTargetLocationList; //  目的地リスト
+    private List<String[]> mTargetLocationList =    //  目的地リスト
+        new ArrayList<String[]>() {
+            {
+                add(new String[]{"皇居","35.6825","139.752778","","東京",""});
+                add(new String[]{"東京タワー","35.65862","139.74539","","東京",""});
+                add(new String[]{"東京スカイツリー","35.7101389","139.8108333","","東京",""});
+                add(new String[]{"富士山","35.3575","138.7306","3776","百名山",""});
+                add(new String[]{"白馬岳","36.7556","137.7617","2932","百名山",""});
+                add(new String[]{"北岳","35.6714","138.2419","3192","百名山",""});
+            }
+        };
     private String[] mTargetLocationTitle;      //  表示用
     private String[] mTargetGroupList;          //  目的地グループリスト
 
@@ -121,10 +132,10 @@ public class GpsInfoActivity extends AppCompatActivity
     //  GPS計測回数
     int mCount = 0;
     //  目的地の緯度経度(初期値は自宅)
-    private String mTargetGroup = "自宅周辺";
-    private String mTargetTitle = "自宅";
-    private double mTargetLatitude = 35.566196;
-    private double mTargetLongitude = 139.69326;
+    private String mTargetGroup = "東京";
+    private String mTargetTitle = "東京タワー";
+    private double mTargetLatitude = 35.65862;
+    private double mTargetLongitude = 139.74539;
     //	現在位置サンプル(初期値は武蔵小杉)
     private double mCurrLatitude = 35.57658;         //	緯度
     private double mCurrLongitude = 139.65967;       //	経度
@@ -162,12 +173,12 @@ public class GpsInfoActivity extends AppCompatActivity
         setContentView(R.layout.activity_gps_info);
 
         ylib = new YLib(this);
-        chkFileAccessPermission();                  //  ファイルアクセスのパーミッションチェック
 
         //  データファイルのベースディレクトリ(/strage/emulated/0/DCIM/gpsinfo)
         File extStrageDir = Environment.getExternalStorageDirectory();
         mDataDirectory = extStrageDir.getAbsolutePath() + "/" + Environment.DIRECTORY_DCIM +
                 "/" + ylib.getPackageNameWithoutExt() + "/";
+        chkFileAccessPermission(mDataDirectory);        //  ファイルアクセスのパーミッションチェック
 //        mDataDirectory = ylib.getPackageNameDirectory();
         if (!ylib.mkdir(mDataDirectory)) {
             Toast.makeText(this, mDataDirectory + " が作成できません", Toast.LENGTH_SHORT).show();
@@ -275,6 +286,7 @@ public class GpsInfoActivity extends AppCompatActivity
         MenuItem item3 = menu.add(Menu.NONE, MENU03, Menu.NONE, "目的地の地図を開く");
         MenuItem item2 = menu.add(Menu.NONE, MENU02, Menu.NONE, "インポート:目的地データ");
         MenuItem item1 = menu.add(Menu.NONE, MENU01, Menu.NONE, "設定");
+        MenuItem item5 = menu.add(Menu.NONE, MENU05, Menu.NONE, "ストレージ・パーミッション");
         MenuItem item0 = menu.add(Menu.NONE, MENU00, Menu.NONE, "ヘルプ");
         item1.setIcon(android.R.drawable.ic_menu_edit);
         item0.setIcon(android.R.drawable.ic_menu_help);
@@ -298,6 +310,9 @@ public class GpsInfoActivity extends AppCompatActivity
                 break;
             case MENU04 :               //  現在地の地図を開く
                 openMaps(String.valueOf(mCurrLatitude), String.valueOf(mCurrLongitude));
+                break;
+            case MENU05:                //  ストレージ・パーミッション
+                goFileAccessPermision();
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -785,7 +800,8 @@ public class GpsInfoActivity extends AppCompatActivity
      */
     private void loadTargetLocData() {
         mTargetFilePath = mDataDirectory + "/" + mTargetFileName;
-        mTargetLocationList = loadTargetLocData(mTargetFilePath);
+        if (ylib.existsFile(mTargetFilePath))
+            mTargetLocationList = loadTargetLocData(mTargetFilePath);
         squeezeLocationList(mTargetLocationList, mTargetLocationFormat);    //  目的地データの重複削除
     }
 
@@ -919,18 +935,28 @@ public class GpsInfoActivity extends AppCompatActivity
     /**
      *  ファイルアクセスのパーミッションチェック
      */
-    private void chkFileAccessPermission() {
+    private void chkFileAccessPermission(String folder) {
         if (30 <= Build.VERSION.SDK_INT)
-            chkManageAllFilesAccess();
+            chkManageAllFilesAccess(folder);
         else
             ylib.checkStragePermission(this);
     }
 
-    /**
-     *  MANAGE_ALL_FILES_ACCESS_PERMISSIONの確認(Android11 API30以上)
-     */
     private void chkManageAllFilesAccess() {
-        File file = new File("/storage/emulated/0/chkManageAllFilesAccess.txt");
+        String path = "/storage/emulated/0/";
+        chkManageAllFilesAccess(path);
+    }
+
+    /**
+     * 指定のフォルダのファイルアクセスの確認
+     * アクセスできないときはパーミッションの設定を開く
+     * @param folder
+     */
+    private void chkManageAllFilesAccess(String folder) {
+        if (folder.charAt(folder.length() - 1) == '/')
+            folder = folder.substring(0, folder.length() - 1);
+        String path = folder + "/chkManageAllFilesAccess.txt";
+        File file = new File(path);
         try {
             if (file.exists())
                 file.delete();
