@@ -1597,18 +1597,48 @@ public class YLib {
      * @param path      開くファイルのパス
      */
     public void executeFile(final Context c, String path) {
+        Log.d(TAG,"executeFile 共有　"+path+" "+getMimeType(path));
         try {
             Intent intent = new Intent(Intent.ACTION_VIEW);
             Uri uri = FileProvider.getUriForFile(c,
                     c.getApplicationContext().getPackageName() + ".provider",
                     new File(path));
             intent.setDataAndType(uri, getMimeType(path));
+//            intent.setDataAndType(uri, "application/gpx");
             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
             c.startActivity(intent);
         } catch (Exception e) {
             e.printStackTrace();
             Toast.makeText(mC, "executeFile: "+e.getMessage()+" "+path, Toast.LENGTH_LONG);
             Log.d(TAG,"executeFile: "+e.getMessage()+" "+path);
+        }
+    }
+
+    /**
+     * 共有(関連付け) ファイル添付
+     * FileProvider を使う(参考: https://www.petitmonte.com/java/android_fileprovider.html)
+     * FileProvider を使うためには manifest.xml に「プロバイダ」を定義する
+     * my_provider.xml に「プロバイダで使用するpath」を定義する
+     * @param c     コンテキスト
+     * @param path  ファイルパス
+     */
+    public void attachedFile(final Context c, String path) {
+        Log.d(TAG,"atachedFile 共有　"+path+" "+getMimeType(path));
+        try {
+            Uri uri = FileProvider.getUriForFile(c,
+                    c.getApplicationContext().getPackageName() + ".provider",
+                    new File(path));
+            Intent intent = new Intent(Intent.ACTION_SEND);
+            intent.putExtra(Intent.EXTRA_EMAIL, "");
+            intent.putExtra(Intent.EXTRA_SUBJECT, "");
+            intent.putExtra(Intent.EXTRA_STREAM, uri);
+            intent.setType(getMimeType(path));
+//            intent.setType("application/gpx");
+            c.startActivity(intent);
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(mC, "atachedFile: "+e.getMessage()+" "+path, Toast.LENGTH_LONG);
+            Log.d(TAG,"atachedFile: "+e.getMessage()+" "+path);
         }
     }
 

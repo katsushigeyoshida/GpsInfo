@@ -207,15 +207,16 @@ public class GpsInfoLib {
     /**
      * インデックスファイルの中からデータを検索する
      * @param date              対象年(日付)
-     * @param searchData        検索データ
-     * @param title             対象分類タイトル
+     * @param searchData        検索データ(GPXファイルパス)
+     * @param title             対象分類タイトル("GPX")
      * @param dataFormat        データフォーマット
+     * @param keyData           キーデータ(年月日,時間)
      * @param indexDirectory    ファイルの保存ディレクトリ
      * @return                  keyデータ(ない時は空白)
      */
     public String findIndexFile(String date, String searchData, String title, String[] dataFormat, String[] keyData, String indexDirectory) {
-        String indexFileName = getLoadIndexFileName(date);
-        if (!ylib.existsFile(indexFileName))
+        String indexFileName = getLoadIndexFileName(date);  //  指定年のインデックスファイル名
+        if (!ylib.existsFile(indexDirectory+"/"+indexFileName+".csv"))
             return "";
         ListData listData = new ListData(mC, dataFormat);
         listData.setKeyData(keyData);

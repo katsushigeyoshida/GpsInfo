@@ -100,7 +100,7 @@ public class DataListActivity extends AppCompatActivity
             mDataDirectory = intent.getStringExtra("SAVEDIR");
 //            mListData.setSaveDirectory(mDataDirectory);
         }
-        mIndexDirectory = mDataDirectory + "/Memo";
+        mIndexDirectory = mDataDirectory + "Memo";
         if (!ylib.mkdir(mIndexDirectory))
             mIndexDirectory = mDataDirectory;
 
@@ -118,8 +118,9 @@ public class DataListActivity extends AppCompatActivity
                     String[] data = gilib.getGpxData(gilib.getGpxPath(gpxFileName), mDataFormat);
                     if (key.length() < 1) {
                         //  新規作成
-                        if (data != null)
+                        if (data != null) {
                             gilib.registIndexFile(data, mDataFormat, mKeyData, mIndexDirectory);
+                        }
                     } else {
                         //  既存データの更新(更新しないデータは空白にする)
                         if (data != null) {

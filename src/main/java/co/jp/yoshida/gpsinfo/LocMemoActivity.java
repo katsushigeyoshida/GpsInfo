@@ -108,7 +108,8 @@ public class LocMemoActivity extends AppCompatActivity
         } else if (button.getText().toString().compareTo("グラフ")==0) {
             goGpxGraph();
         } else if (button.getText().toString().compareTo("共有")==0) {
-            ylib.executeFile(this, gilib.getGpxPath(mListData.getData(mKeyData, "GPX")));
+//            ylib.executeFile(this, gilib.getGpxPath(mListData.getData(mKeyData, "GPX")));
+            ylib.attachedFile(this, gilib.getGpxPath(mListData.getData(mKeyData, "GPX")));
         }
 
     }
