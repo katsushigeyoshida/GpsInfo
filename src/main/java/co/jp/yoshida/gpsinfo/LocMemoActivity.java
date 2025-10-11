@@ -84,7 +84,6 @@ public class LocMemoActivity extends AppCompatActivity
             mDateName = intent.getStringExtra("DATE");                  //  開始日
             mTimeName = intent.getStringExtra("TIME");                  //  開始時間
             mGpxUpdate = intent.getBooleanExtra("GPXUPDATE", true); //  Load時にGPXデータを更新
-            Log.d(TAG,"onCreate:"+mDateName+" "+mTimeName+" "+mGpxUpdate);
         }
 
         gilib = new GpsInfoLib(this, mDataDirectory);
@@ -108,10 +107,24 @@ public class LocMemoActivity extends AppCompatActivity
         } else if (button.getText().toString().compareTo("グラフ")==0) {
             goGpxGraph();
         } else if (button.getText().toString().compareTo("共有")==0) {
-//            ylib.executeFile(this, gilib.getGpxPath(mListData.getData(mKeyData, "GPX")));
-            ylib.attachedFile(this, gilib.getGpxPath(mListData.getData(mKeyData, "GPX")));
+            actionSend(gilib.getGpxPath(mListData.getData(mKeyData, "GPX")), mEdTitle.getText().toString());
         }
 
+    }
+
+    /**
+     * 共有処理(GPXファイルパス名をテキストとして他のアプリに転送)
+     * @param path
+     */
+    private void actionSend(String path, String title) {
+        Intent sendIntent = new Intent();
+        sendIntent.setAction(Intent.ACTION_SEND);
+        sendIntent.putExtra(Intent.EXTRA_TEXT, path);
+        sendIntent.putExtra(Intent.EXTRA_TITLE, title);
+        sendIntent.setType("application/gpx");
+
+        Intent shareIntent = Intent.createChooser(sendIntent, null);
+        startActivity(shareIntent);
     }
 
     /**
@@ -175,7 +188,6 @@ public class LocMemoActivity extends AppCompatActivity
      * @param time      データのキーとなる時間
      */
     private void saveData(String date, String time) {
-        Log.d(TAG,"saveData: ");
         mKeyData = date + time;
         mListData.setData(mKeyData, "分類", getCategoryTitle(), true);
         mListData.setData(mKeyData, "タイトル", mEdTitle.getText().toString(), true);
