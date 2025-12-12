@@ -119,8 +119,8 @@ public class LocMemoActivity extends AppCompatActivity
     private void actionSend(String path, String title) {
         Intent sendIntent = new Intent();
         sendIntent.setAction(Intent.ACTION_SEND);
-        sendIntent.putExtra(Intent.EXTRA_TEXT, path);
-        sendIntent.putExtra(Intent.EXTRA_TITLE, title);
+        sendIntent.putExtra(Intent.EXTRA_TEXT, path);       //  GPXファイルパス
+        sendIntent.putExtra(Intent.EXTRA_TITLE, title);     //  GPS登録タイトル
         sendIntent.setType("application/gpx");
 
         Intent shareIntent = Intent.createChooser(sendIntent, null);
